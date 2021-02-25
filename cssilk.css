@@ -1,6 +1,7 @@
 
 /*Some universal resets:*/
 * {
+
         margin: 0;
         padding: 0;
         border: 0;
@@ -26,7 +27,8 @@ html {
     height: 100%;
     font-size: 400%;
     height: 100%;
-    background-color: #1e392a;
+    background-color:beige;
+/*    #1e392a*/
 }
 body {
     height: 100%;
@@ -172,12 +174,12 @@ section{
 }
 
 .faqpage{
-    background-color: darkgrey !important;
+    background-color: darkgrey ;
     
 
 }
 .containing_q{
-    width:100%;
+    width:80%;
     max-width: 75rem;
     padding:0 1.5rem;
     
@@ -188,8 +190,7 @@ section{
     text-align: center;
 }
 .expansion{
-    background-color: yellow;
-    background-color: lightgray;
+
     padding:0.2rem;
     margin-bottom: 0.5rem;
     margin-top:0.5rem;
@@ -228,13 +229,14 @@ section{
     font-size: 80%;
     text-align: center;
     padding-top: 2%;
+    padding-bottom: 2%;
 }
 
 .qanswer::before{
     content:"";
     position:absolute;
     width: 0.05rem;
-    height:90%;
+    height:95%;
     background-color: black;
     
 
@@ -248,11 +250,11 @@ section{
     font-size: 0.6rem;
 /*    The following is done, so that we cannot see the answer. It makes it so that the answer does not display on the screen.*/
     
+    background-color: aliceblue;
     max-height: 0rem;
     overflow: hidden;
     position:relative;
-    background-color: transparent;
-    transition: 600ms;
+    transition: 800ms;
     
 }
 
@@ -266,7 +268,8 @@ section{
 
 
 .expansion:target .qanswer{
-    max-height: 1rem;
+    max-height: 10rem;
+    
     
 }
 
