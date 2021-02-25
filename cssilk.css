@@ -26,7 +26,7 @@ html {
     height: 100%;
     font-size: 400%;
     height: 100%;
-    background-color: darkgrey;
+    background-color: #1e392a;
 }
 body {
     height: 100%;
@@ -275,11 +275,11 @@ section{
 /* ABOUT US PAGE:*/
 
 .slogan{
-    background-color: #d9d9d9;
+    background-color: #3cc47c;
     text-align: center;
-    padding-top: 3%;
-    padding-bottom: 3%;
-    
+    padding-top: 4%;
+    padding-bottom: 4%;
+    color:#e9c893;
 }
 
 /* Smartphones (portrait and landscape) ----------- */
