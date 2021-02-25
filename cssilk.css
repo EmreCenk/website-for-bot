@@ -27,7 +27,8 @@ html {
     height: 100%;
     font-size: 400%;
     height: 100%;
-    background-color:beige;
+    background-color:black;
+    color:white;
 /*    #1e392a*/
 }
 body {
@@ -39,7 +40,7 @@ body {
 
 .cancel_all{
     text-decoration: none;
-    color:black;
+    color:white;
     background-color: transparent;
 }
 
@@ -53,16 +54,19 @@ head{
 
 
 #explanation p {
-    font-size: 50%;
+    font-size: 80%;
     text-align: center;
     background-color: none;
     padding-left: 15%;
     padding-right: 15%;
     padding-bottom: 5%;
+    font-weight: bold;
 }
 
 
 #start{
+    color:inherit;
+    background:inherit;
     position: relative;
     text-align: center;
     left: 50%; 
@@ -106,24 +110,21 @@ button{
 }
 
 button:focus{
-    background-color: black;
+    background-color: transparent;
 }
 
 button:hover{
-    background-color: black;
-    color:white;
+    background-color: transparent;
+
 }
 
-button a:hover{
-    color:white;
-}
 
 
 
 /*NAVBAR STUFF:*/
 /*NAVBAR LINE:*/
 #navcontainer{
-    border-bottom: black solid 3px;
+    border-bottom: transparent solid 3px;
     height:50px;
     padding-bottom: 1%;    
 }
@@ -131,7 +132,8 @@ button a:hover{
 
 /*NAVBAR LINKS::*/
 #navcontainer li a {
-    color: black;
+    color:inherit;
+
     text-decoration: none;
     padding-top: 1%;
     padding-right: 2.5%;
@@ -146,8 +148,7 @@ button a:hover{
 
 /* mouse over link */
 #navcontainer a:hover {
-  background-color: red;
-    color:white;
+    color:#FED136;
 }
 
 #navcontainer ul{
