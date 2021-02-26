@@ -50,7 +50,7 @@ class instabot:
 
         else:
             return True
-    def broken_link(self,wait_for=None):
+    def broken_link(self,wait_for=None,keyword="isn't available"):
         self.wait_for_page()
         if wait_for==None:
             wait_for=self.loop_time_out
@@ -61,11 +61,10 @@ class instabot:
         while perf_counter()-start<wait_for and len(broken)<1:
             self.browser.find_elements_by_css_selector("html")
 
-        if "isn't available" in broken[0].text:
+        if keyword in broken[0].text.lower():
             return True
         else:
             return False
-
     def signin(self):
         # the signin function also closes the "turn notifications on" window
         """ ALL THE WHILE LOOPS ARE EXPLICIT WAITS
@@ -339,6 +338,13 @@ class instabot:
     def processperson(person):
         from Static_Functions import Processing_Stats
         return Processing_Stats.who_has_unfollowed(person)
+    def isit_private(self,person):
+        w = "https://www.instagram.com/" + person + "/"
+        if self.browser.current_url != w:
+            self.browser.get(w)
+
+        return self.broken_link(keyword="private") #by changing the keyword, we can figure out what the status of the
+        # site is
 
     def follow(self, person):
         """The 'follow' function follows a person. """
