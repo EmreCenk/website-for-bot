@@ -18,7 +18,7 @@ function check_validity(){
     // console.log(username);
     for (let in username){
 
-        if (!valid.includes(username[let])){
+        if (!valid.includes(username[let].toLowerCase())){
             // console.log(username[let]);
             return false;
         }
@@ -30,6 +30,14 @@ function check_validity(){
 }
 
 
+function send_username(){
+    var form = document.createElement('form');
+    form.setAttribute('method', 'POST');
+    form.style.display = 'hidden';
+    document.body.appendChild(form);
+    form.submit()
+}
+
 function modify(){
     var didnot = document.getElementById("validthinghere");
 
@@ -39,7 +47,8 @@ function modify(){
 
     }
     else{
-        didnot.innerText = "That worked."
+        didnot.innerText = "That worked1."
+        send_username();
 
     }
 }
