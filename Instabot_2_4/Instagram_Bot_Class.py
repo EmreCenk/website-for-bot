@@ -9,7 +9,7 @@ class instabot:
             # from selenium.webdriver.common.action_chains import ActionChains
             from datetime import datetime
 
-            self.browser = webdriver.Chrome(r"chromedriver\chromedriver.exe")
+            self.browser = webdriver.Chrome(r"Instabot_2_4\chromedriver\chromedriver.exe")
 
             #We have to create a separate ActionChains object each time we need to use ActionChains. This is due to
             # the fact that the send_keys function under ActionChains has a bug that can only be fixed by making a
@@ -65,6 +65,8 @@ class instabot:
             return True
         else:
             return False
+
+
     def signin(self):
         # the signin function also closes the "turn notifications on" window
         """ ALL THE WHILE LOOPS ARE EXPLICIT WAITS
