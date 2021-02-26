@@ -5,7 +5,7 @@ function check_validity(){
     
     var username =document.getElementById("name").value;
 
-    if (username.length>30){
+    if (username.length>30 || username.length<1){
         // console.log(`${username.length} was too much`)
         return false
     }
