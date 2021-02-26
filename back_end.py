@@ -2,21 +2,16 @@
 
 
 
-
+from Instabot_2_4.Instagram_Bot_Class import instabot #The bot of the hour. He has finally arrived
 from flask import Flask,render_template
-# from flask_sqlalchemy import SQLAlchemy
 
+#INITIALIZE BOT:
+username="something"
+password="password"
+
+bot = instabot(username,password)
 
 my_app=Flask(__name__,template_folder="",static_folder="")
-# my_app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///site.db'
-
-
-# db = SQLAlchemy(my_app) #initialize database
-
-
-# class user(db.Model):
-
-#     username = db
 
 
 @my_app.route('/',methods=["POST","GET"])
