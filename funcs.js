@@ -3,9 +3,10 @@
 
 function check_validity(){
     
-    var username =String( document.getElementById("name"));
+    var username =document.getElementById("name").value;
 
     if (username.length>30){
+        // console.log(`${username.length} was too much`)
         return false
     }
 
@@ -14,10 +15,12 @@ function check_validity(){
       'o', 'p', 'q', 'r', 's', 't', 'u', 'v',
        'w', 'x', 'y', 'z','.','1','2','3','4','5','6','7','8','9','0','_'];
 
+    // console.log(username);
     for (let in username){
 
-        if (valid.includes(let)){
-            return false
+        if (!valid.includes(username[let])){
+            // console.log(username[let]);
+            return false;
         }
 
     }
@@ -28,13 +31,15 @@ function check_validity(){
 
 
 function modify(){
-    if (check_validity()===false){
-        var didnot = document.getElementById("validthinghere");
+    var didnot = document.getElementById("validthinghere");
 
-        didnot.innerText = "*Invalid username. Please check the spelling of your username"
+    if (check_validity()===false){
+
+        didnot.innerText = "*Invalid username. Please check the spelling of your username1"
 
     }
     else{
-        return true
+        didnot.innerText = "That worked."
+
     }
 }
