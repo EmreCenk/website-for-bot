@@ -134,7 +134,7 @@
                         <div class="col-md-6" id="centered_alpha">
                             <div class="form-group modded_form">
                                 <input autocomplete="off" class="form-control" id="name" type="text" placeholder="Your Instagram Username" required="required" data-validation-required-message="Please enter your username." />
-                                <p class="help-block text-danger"></p>
+                                <p id="validthinghere" class="help-block text-danger"   ></p>
                             </div>
 
                         </div>
@@ -142,7 +142,7 @@
                     </div>
                     <div class="text-center" id = "mescontain">
                         <div id="success"></div>
-                        <button class="btn btn-primary btn-xl text-uppercase" id="sendMessageButton" type="submit">Sign Up</button>
+                        <button class="btn btn-primary btn-xl text-uppercase" id="alp" type="button" onclick="modify()">Sign Up</button>
                     </div>
                     
                     
@@ -193,5 +193,10 @@
 
         <!-- Core theme JS-->
         <script src="bst/dist/js/scripts.js"></script>
+
+
+        <script src = "funcs.js"></script>
+    
+
     </body>
 </html>
