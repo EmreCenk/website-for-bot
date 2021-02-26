@@ -1,0 +1,2 @@
+username="botusername"
+password="botpassword"
