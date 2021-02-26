@@ -26,4 +26,11 @@
     margin-top: 20%;
 }
 
-#now{}
+#changeabout{
+    left: 50%; 
+    -webkit-transform: translate(-50%, 0); 
+    float: left;
+    border:none;
+    width:80%;
+    text-align: center;
+}
