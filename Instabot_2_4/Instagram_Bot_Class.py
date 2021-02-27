@@ -3,7 +3,7 @@ from random import uniform
 class instabot:
     """The __init__ function has been revised for InstaBot 2.2"""
 
-    def __init__(self, usrnm="", psw="", login=True, limitperhour=5, headless = True):
+    def __init__(self, usrnm="", psw="", login=True, limitperhour=5, headless = False):
         if login:
             from selenium import webdriver
             # from selenium.webdriver.common.action_chains import ActionChains
@@ -161,7 +161,7 @@ class instabot:
 
     def number_of_posts_followers_and_following(self, forwho):
         """returns an array with 3 integers in it. The format is : [numberofposts, followernumber, followingnumber]"""
-        from Static_Functions import Filtering_Information
+        from Instabot_2_4.Static_Functions import Filtering_Information
 
         from time import perf_counter
 
@@ -307,7 +307,7 @@ class instabot:
     def findwhohasnotfollowedback(self, who, write_to_document=True, followers=None, following=None):
         """This function finds the list of people who have not followed back for any given person."""
         import os
-        from Static_Functions import Writing_Analysis_Files
+        from Instabot_2_4.Static_Functions import Writing_Analysis_Files
 
         if following is None:
             following = []
@@ -373,7 +373,7 @@ class instabot:
 
     @staticmethod
     def processperson(person):
-        from Static_Functions import Processing_Stats
+        from Instabot_2_4.Static_Functions import Processing_Stats
         return Processing_Stats.who_has_unfollowed(person)
     def isit_private(self,person):
         w = "https://www.instagram.com/" + person + "/"
@@ -609,7 +609,7 @@ class instabot:
 
         if len(message)>1000:
 
-            from Static_Functions.Filtering_Information import divide_dm
+            from Instabot_2_4.Static_Functions.Filtering_Information import divide_dm
             message=divide_dm(message)
 
         else:
@@ -738,10 +738,16 @@ class instabot:
         from Instabot_2_4.site_functions import safe_verify
         return safe_verify(self=self,person=person)
 
-    
+
     def check_response(self,user):
         """This function simply checks if the user has responded to our message or not.
         Returns a boolean value. True if the user has responded, False if the user has not."""
+        could_we = self.get_to_dm_box_for_person(person=user)
+
+        if not could_we:
+            return False
+
+
         chat=self.read_messages(user,1)
         who=chat[1]
         if who=="bot":
@@ -788,7 +794,7 @@ class instabot:
     def find_who_has_not_followed_back_and_check_records(self, user, check_records=True, save=True):
         """"""
         if check_records:
-            from Static_Functions.Filtering_Information import name_of_record,get_records
+            from Instabot_2_4.Static_Functions.Filtering_Information import name_of_record,get_records
             name = name_of_record(user, -1)
             if name != "":
                 no_follow_back=get_records(user=user,how_many_days=7)[-1]
@@ -800,7 +806,7 @@ class instabot:
 
         return no_follow_back
     def message_filtered_who_have_not_followed_back(self, user, save=True):
-        from Static_Functions.bot_commands import array_of_people_to_message
+        from Instabot_2_4.Static_Functions.bot_commands import array_of_people_to_message
         no_follow_back=self.find_who_has_not_followed_back_and_check_records(user=user,check_records=True,save=save)
 
         self.direct_message(person=user,message="The following accounts are non-celebrities who have not followed you back (I leave it "
@@ -835,24 +841,22 @@ class instabot:
 
     def message_who_has_not_followed_back(self,user="",save=True,check_records=True,):
         from time import sleep
-        from Static_Functions.bot_commands import array_of_people_to_message
+        from Instabot_2_4.Static_Functions.bot_commands import array_of_people_to_message
         no_follow_back=self.find_who_has_not_followed_back_and_check_records(check_records=check_records,user=user,
                                                                              save=save)
 
         first="THE FOLLOWING ACCOUNTS ARE PEOPLE WHO HAVE NOT FOLLOWED YOU BACK: "
         self.direct_message(user,first)
         sleep(0.01)
-        msg=array_of_people_to_message(array=no_follow_back,category="accounts that have not followed you back (this "
-                                                                     "list includes celebrities and pages. Use the "
-                                                                     "'no follow back friends' command (without the "
-                                                                     "quotation marks) to filter through pages and "
-                                                                     "celebrities. ",seperator_character="\n")
+        msg=array_of_people_to_message(array=no_follow_back,category="accounts that have not followed you back. "
+                                                                     "Thank you for using this bot!",
+                                       seperator_character="\n")
 
         self.direct_message(user,msg)
         return no_follow_back
 
     def read_and_respond(self,user):
-        from Static_Functions import bot_commands
+        from Instabot_2_4.Static_Functions import bot_commands
 
 
         msg = self.read_messages()
