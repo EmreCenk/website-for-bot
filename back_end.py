@@ -20,7 +20,7 @@ def index():
         user=str(request.form['name'])
         # bot.follow(user)
         result = "I have sent a request to " + user
-        return ('', 204) 
+        return ('', 204) #since we can't return nothing, we return this instead
     else:
 
         return render_template("index.html")
