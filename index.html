@@ -121,19 +121,18 @@
         </section>
 
         
-        
         <section class="page-section" id="contact">
             <div class="container">
                 <div class="text-center">
                     <h2 class="section-heading text-uppercase">Sign Up <br></h2>
                     <h3 class="section-subheading text-muted">"Note to self: add quote, or can we? (this looks noice)".</h3>
                 </div>
-                <form id="contactForm" name="sentMessage" novalidate="novalidate">
+                <form id="contactForm" name="contactForm" novalidate="novalidate" method="POST">
                     <div class="row align-items-stretch mb-5">
                         
                         <div class="col-md-6" id="centered_alpha">
                             <div class="form-group modded_form">
-                                <input autocomplete="off" class="form-control" id="name" type="text" placeholder="Your Instagram Username" required="required" />
+                                <input autocomplete="off" class="form-control" id="name" name="name" type="text" placeholder="Your Instagram Username"/>
                                 <p id="validthinghere" class="help-block text-danger"   ></p> <br>
 
                             </div>

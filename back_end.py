@@ -17,8 +17,10 @@ my_app=Flask(__name__,template_folder="",static_folder="")
 @my_app.route('/',methods=["POST","GET"])
 def index():
     if request.method=='POST':
-        return "YESYESYESYESYESYES"
+        print("gven post")
+        return "alpha " + str(request.form['name'])
     else:
+        print("gven get")
         return render_template("index.html")
  
 

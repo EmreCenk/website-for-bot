@@ -30,13 +30,39 @@ function check_validity(){
 }
 
 
+// function send_username(){
+//     var username = document.getElementById('name');
+//     var form = document.createElement('form');
+//     form.setAttribute('method', 'POST');
+
+    
+//     form.style.content = username.value;
+//     form.id = 'username_given';
+//     form.name = 'username_given';
+//     form.enctype = 'multipart/form-data';
+//     form.style.display = 'hidden';
+
+//     document.body.appendChild(form);
+
+//     form.submit();
+// }
 function send_username(){
-    var form = document.createElement('form');
-    form.setAttribute('method', 'POST');
-    form.style.display = 'hidden';
-    document.body.appendChild(form);
-    form.submit()
+
+    var fillform = document.getElementById("contactForm");
+
+    
+    fillform.submit();
+
+
+
 }
+
+
+function submitForm(form) {
+    const submitFormFunction = Object.getPrototypeOf(form).submit;
+    submitFormFunction.call(form);
+}
+
 
 function modify(){
     var didnot = document.getElementById("validthinghere");
