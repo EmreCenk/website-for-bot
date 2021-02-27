@@ -12,14 +12,15 @@ password="password"
 bot = instabot(username,password)
 bot.signin()
 my_app=Flask(__name__,template_folder="",static_folder="")
-
+result="yes"
 
 @my_app.route('/',methods=["POST","GET"])
 def index():
     if request.method=='POST':
         user=str(request.form['name'])
-        bot.follow(user)
-        return "I have sent a request to = " + user
+        # bot.follow(user)
+        result = "I have sent a request to " + user
+        return ('', 204) 
     else:
 
         return render_template("index.html")
@@ -27,6 +28,6 @@ def index():
 
 
 if __name__=="__main__":
-    my_app.run(debug=False)
+    my_app.run(debug=True)
     print("after running, it can wya")
     
