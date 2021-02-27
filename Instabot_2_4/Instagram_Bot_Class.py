@@ -3,13 +3,28 @@ from random import uniform
 class instabot:
     """The __init__ function has been revised for InstaBot 2.2"""
 
-    def __init__(self, usrnm="", psw="", login=True, limitperhour=5):
+    def __init__(self, usrnm="", psw="", login=True, limitperhour=5, headless = True):
         if login:
             from selenium import webdriver
             # from selenium.webdriver.common.action_chains import ActionChains
             from datetime import datetime
 
-            self.browser = webdriver.Chrome(r"chromedriver\chromedriver.exe")
+            user_agent = "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/85.0.4183.83 Safari/537.36"
+            options = webdriver.ChromeOptions()
+            if headless:
+                options.headless = True
+                options.add_argument(f'user-agent={user_agent}')
+                options.add_argument("--window-size=1920,1080")
+                options.add_argument('--ignore-certificate-errors')
+                options.add_argument('--allow-running-insecure-content')
+                options.add_argument("--disable-extensions")
+                options.add_argument("--proxy-server='direct://'")
+                options.add_argument("--proxy-bypass-list=*")
+                options.add_argument("--start-maximized")
+                options.add_argument('--disable-gpu')
+                options.add_argument('--disable-dev-shm-usage')
+                options.add_argument('--no-sandbox')
+            self.browser = webdriver.Chrome(executable_path="Instabot_2_4\chromedriver\chromedriver.exe", options=options)
 
             #We have to create a separate ActionChains object each time we need to use ActionChains. This is due to
             # the fact that the send_keys function under ActionChains has a bug that can only be fixed by making a
@@ -74,7 +89,7 @@ class instabot:
 
         from random import randint,uniform
         from selenium.webdriver.common.keys import Keys
-        from time import sleep
+        from time import sleep,perf_counter
 
         self.browser.get("https://www.instagram.com/")
         sleep(randint(3, 5))
@@ -82,6 +97,7 @@ class instabot:
         usernameplace = self.browser.find_elements_by_name("username")
         while len(usernameplace) < 1:
             usernameplace = self.browser.find_elements_by_name("username")
+
 
         usernameplace[0].click()
         sleep(uniform(0,1))
@@ -93,10 +109,12 @@ class instabot:
             passwordplace = self.browser.find_elements_by_name("password")
         sleep(uniform(0,1.5))
 
+
         passwordplace[0].send_keys(self.psw)
         sleep(uniform(0,1.5))
         passwordplace[0].send_keys(Keys.ENTER)
         usernameplace = self.browser.find_elements_by_name("username")
+
 
         #WE WAIT UNTIL THE SITE HAS LOADED OUR PAGE:
         while len(usernameplace) > 0:
@@ -104,19 +122,30 @@ class instabot:
         sleep(1)
 
         if self.browser.current_url == "https://www.instagram.com/accounts/onetap/?next=%2F":
+
             options = self.browser.find_elements_by_class_name("sqdOP")
+
             while len(options) < 2:
                 options = self.browser.find_elements_by_class_name("sqdOP")
+
             sleep(randint(1, 2))
             options[1].click()
 
+
         notnow = self.browser.find_elements_by_class_name("HoLwm")
 
-        while len(notnow) < 1:
-            notnow = self.browser.find_elements_by_class_name("HoLwm")
-        sleep(randint(0, 2))
-        notnow[0].click()
 
+        started=perf_counter()
+        while len(notnow) < 1 and perf_counter()-started<3:
+
+            notnow = self.browser.find_elements_by_class_name("HoLwm")
+        print("ininin")
+        
+        try:
+            sleep(randint(0, 2))
+            notnow[0].click()
+        except:
+            pass
 
     def check_action(self):
         """This function makes sure that you have met all the requirements to execute an actions"""
