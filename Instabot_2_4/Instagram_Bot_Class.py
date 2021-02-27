@@ -734,6 +734,11 @@ class instabot:
         return self.direct_message(user,msg)
 
 
+    def safe_verify(self, person):
+        from Instabot_2_4.site_functions import safe_verify
+        return safe_verify(self=self,person=person)
+
+    
     def check_response(self,user):
         """This function simply checks if the user has responded to our message or not.
         Returns a boolean value. True if the user has responded, False if the user has not."""
