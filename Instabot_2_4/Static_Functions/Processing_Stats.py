@@ -182,7 +182,7 @@ def order_accounts(array):
 def interval_analysis(username,function_to_analyse,category="unfollowed"):
     import os
     global path
-    from working_with_dates import parse_date_from_file, calculatetimepassed,convert_to_days
+    from Instabot_2_4.Static_Functions.working_with_dates import parse_date_from_file, calculatetimepassed,convert_to_days
 
 
     pathtogo=path[0:-1]
