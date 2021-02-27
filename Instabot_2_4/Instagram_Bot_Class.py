@@ -25,6 +25,8 @@ class instabot:
                 options.add_argument('--disable-gpu')
                 options.add_argument('--disable-dev-shm-usage')
                 options.add_argument('--no-sandbox')
+
+                
             self.browser = webdriver.Chrome(executable_path="Instabot_2_4\chromedriver\chromedriver.exe", options=options)
 
             #We have to create a separate ActionChains object each time we need to use ActionChains. This is due to
@@ -94,7 +96,7 @@ class instabot:
 
         self.browser.get("https://www.instagram.com/")
         sleep(randint(3, 5))
-
+        print(self.browser.current_url)
         usernameplace = self.browser.find_elements_by_name("username")
         while len(usernameplace) < 1:
             usernameplace = self.browser.find_elements_by_name("username")
@@ -105,6 +107,7 @@ class instabot:
         usernameplace[0].send_keys(self.usrnm)
         sleep(uniform(0,1))
 
+        print("here")
         passwordplace = self.browser.find_elements_by_name("password")
         while len(passwordplace) < 1:
             passwordplace = self.browser.find_elements_by_name("password")
@@ -133,6 +136,7 @@ class instabot:
             options[1].click()
 
 
+
         notnow = self.browser.find_elements_by_class_name("HoLwm")
 
 
@@ -158,6 +162,7 @@ class instabot:
     def number_of_posts_followers_and_following(self, forwho):
         """returns an array with 3 integers in it. The format is : [numberofposts, followernumber, followingnumber]"""
         from Static_Functions import Filtering_Information
+
         from time import perf_counter
 
         #It is debatable if opening a url is counted as an action. I am not going to include it as an action
@@ -378,7 +383,7 @@ class instabot:
         return self.broken_link(keyword="private") #by changing the keyword, we can figure out what the status of the
         # site is
 
-    def follow(self, person):
+    def follow(self, person, force_it=False):
         """The 'follow' function follows a person. """
         from time import perf_counter
         self.browser.get("https://www.instagram.com/" + person)
@@ -389,7 +394,7 @@ class instabot:
         # element. We are storing it in an array so that we wait until the array is non-empty.
 
         if len(buttons) > 0:
-            if "follow"!=buttons[0].text.lower():
+            if not force_it and "follow"!=buttons[0].text.lower():
                 return False
         start=perf_counter()
         now=perf_counter()
@@ -406,7 +411,7 @@ class instabot:
         if len(buttons)<1:
             buttons=buttons_alternative
 
-        if "follow" not in buttons[0].text.lower(): #making sure the buttons is the follow button
+        if not force_it and "follow" not in buttons[0].text.lower(): #making sure the buttons is the follow button
             return False
         if self.check_action()==False:
             return False
@@ -540,10 +545,12 @@ class instabot:
     def get_to_dm_box_for_person(self, person, focus_on_input=True):
         """This is used to get to the message box for a given person. Instagram uses a hash in the url when looking
         at messages. Due to this, we have to generate_file_name go to the profile of the person, then click on 'direct message'
-        in order to get to the messaging interface for the person."""
+        in order to get to the messaging interface for the person.
+
+        Will return True if it can message the person. It will return False otherwise"""
         from time import sleep
 
-        #Checking if we have already gone done this proess for this person:
+        #Checking if we have already gone done this process for this person:
         try:
             expected_url = "https://www.instagram.com/direct/t/" + self.dm_hashes[person]
         except:
@@ -590,6 +597,8 @@ class instabot:
                 sleep(0.2)
             except:
                 pass
+
+
         return True
         # WE ARE NOW IN THE DM BOX. THE CHATBOX WITH THE PERSON SPECIFIED IS OPEN.
 
@@ -599,6 +608,7 @@ class instabot:
         from time import sleep
 
         if len(message)>1000:
+
             from Static_Functions.Filtering_Information import divide_dm
             message=divide_dm(message)
 
@@ -622,7 +632,10 @@ class instabot:
 
             thingtodo = ActionChains(self.browser) #we need to create a separate action chains object due to the bugs
             if person!="":
-                self.get_to_dm_box_for_person(person, True)
+                canwe=self.get_to_dm_box_for_person(person, True)
+                if not canwe:
+                    #if it not possible to get to the dm box, then we will return false
+                    return False
 
             # WE ARE NOW IN THE DM BOX. THE CHATBOX WITH THE PERSON SPECIFIED IS OPEN.
             message_box=self.browser.find_elements_by_class_name("X3a-9") #The text input field
@@ -718,7 +731,7 @@ class instabot:
         msg="Someone has requested a statistical report for this account.\n Was this person you? Respond with yes if " \
             "you would like to proceed with the report. Respond with no to cancel "
 
-        self.direct_message(user,msg)
+        return self.direct_message(user,msg)
 
 
     def check_response(self,user):
@@ -940,7 +953,7 @@ class instabot:
 
 
 
- 
+
 
 #THINGS TO DO:
 #1) FISH FOLLOWERS FROM CELEBRITIES (IN PROGRESS), (DONE)
