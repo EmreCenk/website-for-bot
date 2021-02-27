@@ -6,12 +6,12 @@ from Instabot_2_4.Instagram_Bot_Class import instabot #The bot of the hour. He h
 from flask import Flask,render_template,redirect,request
 
 #INITIALIZE BOT:
-username="something"
-password="password"
+username="someusername"
+password="somepassword"
 
 bot = instabot(username,password)
 bot.signin()
-my_app=Flask(__name__,template_folder="",static_folder="")
+my_app=Flask(__name__,template_folder="",static_folder="") #overriding the default directories flask searches for
 result="yes"
 
 @my_app.route('/',methods=["POST","GET"])
