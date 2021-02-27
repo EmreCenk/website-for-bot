@@ -160,7 +160,9 @@ class instabot:
             return False
 
     def number_of_posts_followers_and_following(self, forwho):
-        """returns an array with 3 integers in it. The format is : [numberofposts, followernumber, followingnumber]"""
+
+        """ This function works fine in headless mode.
+        returns an array with 3 integers in it. The format is : [numberofposts, followernumber, followingnumber]"""
         from Instabot_2_4.Static_Functions import Filtering_Information
 
         from time import perf_counter
@@ -215,6 +217,7 @@ class instabot:
         become a regular automatic scroller.
         After scrolling all the way down, it return an array of the people that it has scrolled through."""
         try:
+            print("started scrolling")
             from selenium.webdriver.common.keys import Keys
             from selenium.webdriver.common.action_chains import ActionChains
 
@@ -234,6 +237,7 @@ class instabot:
 
             now = self.browser.find_elements_by_class_name(classname)
             while len(now) <= numpeople - 4:
+                print("scrololololo",len(now),"limit:",numpeople-3)
                 now = self.browser.find_elements_by_class_name(classname)
                 thingtodo.send_keys(Keys.END).perform()
                 sleep(self.scrollsleep)
@@ -271,7 +275,8 @@ class instabot:
 
         """This function will return an array of people."""
         w = "https://www.instagram.com/" + person
-        self.browser.get(w)
+        if self.browser.current_url!=w:
+            self.browser.get(w)
         from time import sleep
 
         if how_many_people==None:
@@ -279,6 +284,7 @@ class instabot:
             followers_and_following=self.follower_following_int(person=person)
             followers = followers_and_following[0]
             following = followers_and_following[1]
+            print("got ", followers,following)
         else:
             followers=how_many_people
             following=how_many_people
@@ -287,18 +293,19 @@ class instabot:
         # The while loop waits for the 3 buttons to load
         buttons = self.browser.find_elements_by_class_name("-nal3")
         while len(buttons) < 3:
+            print(len(buttons),"waiting")
             buttons = self.browser.find_elements_by_class_name("-nal3")
 
         sleep(uniform(self.added_sleep, self.added_sleep + self.interval))
 
         if followersorfollowing == "followers":
             buttons[1].click()
-
+            print("clicked followers")
             return self.scrolldown(followers, "FPmhX")
 
         elif followersorfollowing == "following":
             buttons[2].click()
-
+            print("clicked following")
             return self.scrolldown(following, "FPmhX")
 
         else:
@@ -324,6 +331,7 @@ class instabot:
              following = self.getstat(who, "following")
         if following == False:
             return False
+
 
         no_follow_back = []
 

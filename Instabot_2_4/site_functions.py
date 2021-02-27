@@ -13,8 +13,3 @@ def safe_verify(self,person):
     else:
         return False
 
-
-if __name__ == '__main__':
-
-    from Instabot_2_4.Instagram_Bot_Class import instabot
-    print(safe_verify(self=instabot(),person="asdf"))
