@@ -9,9 +9,10 @@ class instabot:
             # from selenium.webdriver.common.action_chains import ActionChains
             from datetime import datetime
 
-            user_agent = "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/85.0.4183.83 Safari/537.36"
             options = webdriver.ChromeOptions()
             if headless:
+                #Options to enable headless browser:
+                user_agent = "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/85.0.4183.83 Safari/537.36"
                 options.headless = True
                 options.add_argument(f'user-agent={user_agent}')
                 options.add_argument("--window-size=1920,1080")
