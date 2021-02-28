@@ -7,8 +7,8 @@ from flask import Flask,render_template,redirect,request,url_for
 from time import perf_counter,sleep
 
 #INITIALIZE BOT:
-username="mj.devs55@gmail.com"
-password="hadibuolsun"
+username="usernameforabot" #can't reveal since this repo is public
+password="passwordforabot" #can't reveal since this repo is public
 
 bot = instabot(username,password,headless = True)
 bot.signin()

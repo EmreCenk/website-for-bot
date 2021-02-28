@@ -1,7 +1,9 @@
 from time import sleep, perf_counter
 from random import uniform
 class instabot:
-    """The __init__ function has been revised for InstaBot 2.2"""
+    """The __init__ function has been revised for InstaBot 2.4
+    Note: vscode may sometimes highlight import parts and say that it cannot import certain modules/files, however
+    the code functions perfectly fine regardless. This seems to be a bug/problem regarding pylint. """
 
     def __init__(self, usrnm="", psw="", login=True, limitperhour=5, headless = False):
         if login:

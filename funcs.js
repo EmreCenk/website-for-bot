@@ -73,8 +73,9 @@ function modify(){
 
     }
     else{
-        didnot.innerText = "Please wait as the bot finds your account..."
+        didnot.innerText = "Please wait as the bot finds your account...";
         send_username();
+        window.location.href = "/verify";
 
     }
 }
