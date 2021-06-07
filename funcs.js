@@ -48,10 +48,10 @@ function check_validity(){
 // }
 function send_username(){
 
-    var fillform = document.getElementById("contactForm");
-
+    $("#contactForm").submit(function(e) {
+        e.preventDefault();
+    });
     
-    fillform.submit();
 
 
 
@@ -65,17 +65,18 @@ function submitForm(form) {
 
 
 function modify(){
+
     var didnot = document.getElementById("validthinghere");
 
-    if (check_validity()===false){
+    // if (check_validity()===false){
 
-        didnot.innerText = "*Invalid username. Please check the spelling of your username1"
+    didnot.innerText = "Unfortunately the bot is inactive right now. This username has been added to the database."
 
-    }
-    else{
-        didnot.innerText = "Please wait as the bot finds your account...";
-        send_username();
-        window.location.href = "/verify";
+    // }
+    // else{
+    //     didnot.innerText = "Please wait as the bot finds your account...";
+    send_username();
+    //     window.location.href = "/verify";
 
-    }
+    // }
 }
